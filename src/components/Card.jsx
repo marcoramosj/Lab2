@@ -1,15 +1,10 @@
-export const Card = ({id, name, sprites = []}) => {
+export const Card = ({ id, name, image, status, species }) => {
     return (
-      <section style={{height:200}}>
-        <h2 className="text-capitalize">#{id} - { name }</h2>
-  
-        <div>
-          {
-            sprites.map( sprite => (
-              <img src={sprite} key={sprite} alt={name}/>
-            ))
-          }
-        </div>
+      <section style={{textAlign:'center'}}>
+        <h2>#{id} - {name}</h2>
+        <img src={image} alt={name} width={200}/>
+        <p>Status: {status}</p>
+        <p>Species: {species}</p>
       </section>
     )
   }

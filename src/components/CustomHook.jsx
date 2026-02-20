@@ -5,35 +5,32 @@ import { Card } from './Card';
 
 export const CustomHook = () => {
 
-  const { counter, decrement, increment } = useCounter(1);
-  const {data, hasError, isLoading} = useFetch(`https://pokeapi.co/api/v2/pokemon/${counter}`);
+  const { counter, increment, decrement } = useCounter(1);
+
+  const { data, isLoading, hasError } =
+    useFetch(`https://rickandmortyapi.com/api/character/${counter}`);
 
   return (
     <>
-      <h1>Información de Pokemon</h1>
+      <h1>Rick and Morty Characters</h1>
       <hr/>
-
-      <h2>{data?.name}</h2>
 
       {
         isLoading
           ? <Loading/>
           : (
             <Card
-              id={counter}
+              id={data.id}
               name={data.name}
-              sprites={[
-                data.sprites.front_default,
-                data.sprites.front_shiny,
-                data.sprites.back_default,
-                data.sprites.back_shiny,
-              ]}
+              image={data.image}
+              status={data.status}
+              species={data.species}
             />
           )
       }
 
-      <button className='btn btn-primary' onClick={()=>decrement()}>Anterior</button>
-      <button className='btn btn-primary' onClick={()=>increment()}>Siguiente</button>
+      <button onClick={()=>decrement()}>Anterior</button>
+      <button onClick={()=>increment()}>Siguiente</button>
     </>
   )
 }
